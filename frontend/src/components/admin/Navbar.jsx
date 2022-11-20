@@ -30,7 +30,7 @@ export default function Navbar() {
           {/* <li>
             <NavItem to="/actors">
               <GiPaperBagFolded color={pathname == '/actors' ? "#cc5200" : "#FDF2E9"} size={24} />
-              <span>Orders</span>
+              <span>Staff</span>
             </NavItem>
           </li> */}
           <li>
@@ -39,18 +39,18 @@ export default function Navbar() {
               <span>Menu Book</span>
             </NavItem>
           </li>
-          {/* <li>
-            <NavItem to="/actors">
-              <img className="h-6" src="chef.png" />
-              <span className="text-white">Chefs</span>
+          <li>
+            <NavItem to="/chef">
+              <img className="h-6" src={pathname == '/chef' ? "chef_2.png" : "chef.png"} />
+              <span>Chefs</span>
             </NavItem>
           </li>
           <li>
-            <NavItem to="/actors">
-              <img className="h-6" src="deliveryagent.png" />
-              <span className="text-white">Delivery Agents</span>
+            <NavItem to="/delivery">
+              <img className="h-6" src={pathname == '/delivery' ? "deliveryagent_2.png" : "deliveryagent.png"} />
+              <span>Delivery Agents</span>
             </NavItem>
-          </li> */}
+          </li>
         </ul>
 
         <div className="flex flex-col items-start pb-5">

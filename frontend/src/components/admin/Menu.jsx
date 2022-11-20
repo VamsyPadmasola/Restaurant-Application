@@ -10,7 +10,9 @@ import ConfirmModal from "../modals/ConfirmModal";
 import NotFound from "../ui/NotFound";
 import UpdateActor from "../modals/UpdateActor";
 import NextAndPreviousButton from "./NextAndPreviousButton";
-import { getMenu } from "../../api/menu";
+import { deleteMenuItem, getMenu, searchMenu } from "../../api/menu";
+import Loader from "../ui/Loader";
+import UpdateMenu from "../modals/UpdateMenu";
 
 let currentPageNo = 0;
 const limit = 20;
@@ -22,6 +24,7 @@ export default function Menu() {
     const [busy, setBusy] = useState(false);
     const [showUpdateActorModal, setShowUpdateActorModal] = useState(false)
     const [showConfirmModal, setShowConfirmModal] = useState(false)
+    const [showLoader, setShowLoader] = useState(false)
 
     const [selectedProfile, setSelectedProfile] = useState(null)
 
@@ -83,8 +86,8 @@ export default function Menu() {
         setSelectedProfile(profile)
     }
 
-    const handleOnSearchSubmit = (value) => {
-        handleSearch(searchActor, value, setResults)
+    const handleOnSearchSubmit = async (value) => {
+        await handleSearch(searchMenu, value, setResults)
     }
 
     const handleSearchFormReset = () => {
@@ -97,13 +100,13 @@ export default function Menu() {
     }
 
     const handleOnDeleteConfirm = async () => {
-        // setBusy(true)
-        // const { error, message } = await deleteActor(selectedProfile.id)
-        // setBusy(false)
-        // if (error) return updateNotification('error', error)
-        // updateNotification('success', message)
-        // hideConfirmModal()
-        // fetchActors(currentPageNo)
+        setBusy(true)
+        const { error, message } = await deleteMenuItem(selectedProfile.id)
+        setBusy(false)
+        if (error) return updateNotification('error', error)
+        updateNotification('success', message)
+        hideConfirmModal()
+        fetchMenu()
     }
 
     useEffect(() => {
@@ -112,15 +115,15 @@ export default function Menu() {
 
     return (
         <>
-            <div className="p-2">
-                <div className="flex justify-end">
+            <div className="">
+                <div className="flex justify-start ml-5">
                     <AppSearchForm onReset={handleSearchFormReset}
                         showResetBtn={results.length || resultNotFound}
-                        onSubmit={handleOnSearchSubmit} placeholder="Search Actors..." />
+                        onSubmit={handleOnSearchSubmit} placeholder="Search Menu..." />
                 </div>
-                <NotFound text='Record not found' visible={resultNotFound} />
+                <NotFound text='No item found' visible={resultNotFound} />
 
-                <div className={"product-list"}>
+                <div className={"product-list ml-3"}>
                     <div className={"product-list--wrapper"}>
                         {results.length || resultNotFound
                             ?
@@ -136,11 +139,6 @@ export default function Menu() {
                         }
                     </div>
                 </div>
-
-                {/* {!results.length && !resultNotFound ? <NextAndPreviousButton
-                    className="mt-5"
-                    onNextClick={handleOnNextClick}
-                    onPrevClick={handleOnPrevClick} /> : null} */}
             </div>
             {
                 showConfirmModal &&
@@ -155,7 +153,7 @@ export default function Menu() {
             }
             {
                 showUpdateActorModal &&
-                <UpdateActor
+                <UpdateMenu
                     initialState={selectedProfile}
                     onClose={handleUpdateActorModal}
                     onSuccess={handleOnActorUpdate} />
@@ -189,79 +187,24 @@ const MenuItem = ({ item, onEditClick, onDeleteClick }) => {
     }
 
     return (
-        <div className={"item-card"}>
+        <div className={"item-card shadow-md"}>
             <img className="aspect-square object-cover" src={image} />
-            <div className="p-2">
-                <div className="flex flex-col">
-                    <span className="text-sm">{name}</span>
-                    <span className="text-sm">₹ {price}</span>
+            <div className="">
+                <div className="flex flex-col ml-3 mt-1">
+                    <span className="text-md">{getName(name)}</span>
+                    <span className="text-md">₹ {price}</span>
                 </div>
-                <div className="w-full flex items-center justify-center space-x-5">
-                    <button type='button' className='text-white bg-secondary rounded-full p-2 hover:opacity-70 transition'
+                <div className="w-full flex items-center justify-center space-x-5 mb-3">
+                    <button type='button' className='text-white bg-success rounded-full p-2 hover:opacity-70 transition'
                         onClick={onEditClick}>
                         <MdModeEditOutline />
                     </button>
-                    <button type='button' className='text-white bg-red-btn rounded-full p-2 hover:opacity-70 transition'
+                    <button type='button' className='text-white bg-failure rounded-full p-2 hover:opacity-70 transition'
                         onClick={onDeleteClick}>
                         <AiFillDelete />
                     </button>
                 </div>
             </div>
-        </div>
-
-        // <div className="flex flex-col w-full">
-        //     <img src={image} alt={name} className="w-32 aspect-square object-cover" />
-        // </div>
-
-        // <div className='bg-white shadow-lightShadow
-        // 	rounded-3xl h-32 overflow-hidden w-[50%]'>
-        //     <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleMouseLeave}
-        //         className="flex cursor-pointer relative">
-        //         <img src={image} alt={name} className="w-32 aspect-square object-cover" />
-
-        //         <div className="p-2 w-full">
-        //             <span className=" text-black text-xl font-bold whitespace-nowrap">
-        //                 {getName(name)}</span>
-        //             <p className="text-black text-xs opacity-70 min-h-[25%]">
-        //                 {getDescr(description)}
-        //             </p>
-        //             <span>
-        //                 Rating
-        //             </span>
-        //             <div className="flex items-center justify-between">
-        //                 <span className="text-lg text-black whitespace-nowrap">
-        //                     ₹ {+"" + price}</span>
-        //                 <div className="flex space-x-5 relative right-2">
-        //                     <div className="rounded-full bg-[#1DA8E2] p-2">
-        //                         <MdModeEditOutline color="#ffffff" />
-        //                     </div>
-        //                     <div className="rounded-full bg-[#B22222] p-2">
-        //                         <AiFillDelete color="#ffffff" />
-        //                     </div>
-        //                 </div>
-        //             </div>
-
-        //         </div>
-        /* <Options onEditClick={onEditClick} onDeleteClick={onDeleteClick} visible={showOptions} /> */
-        // </div>
-        // </div >
-    )
-}
-
-const Options = ({ visible, onEditClick, onDeleteClick }) => {
-    if (!visible)
-        return null
-    return (
-        <div className="absolute inset-0 bg-primary bg-opacity-25 backdrop-blur-sm
-			flex justify-center items-center space-x-5">
-            <button type='button' className='text-white bg-[#89CFF0] rounded-full p-2 hover:opacity-70 transition'
-                onClick={onEditClick}>
-                <MdModeEditOutline />
-            </button>
-            <button type='button' className='text-white bg-red-btn rounded-full p-2 hover:opacity-70 transition'
-                onClick={onDeleteClick}>
-                <AiFillDelete />
-            </button>
         </div>
     )
 }

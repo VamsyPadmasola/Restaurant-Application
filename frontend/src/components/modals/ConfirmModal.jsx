@@ -8,26 +8,26 @@ export default function ConfirmModal({ busy, onConfirm, onCancel, title, subtitl
     return (
         <SecondaryModal
             width='w-20rem '
-            style=" top-[40vh] left-[70vh]"
+            style=" top-[40vh] left-[70vh] bg-primary"
             title='Delete Actor'
             hideClose={true}>
-            <div className='dark:bg-primary bg-white rounded p-1'>
-                <h1 className='text-red-400 font-semibold text-lg'>{title}</h1>
-                <p className='dark:text-white text-primary text-sm'>
+            <div className=' bg-primary rounded p-1'>
+                <h1 className='text-failure font-semibold text-lg'>{title}</h1>
+                <p className='text-black text-sm'>
                     {subtitle}</p>
                 <div className='flex items-center justify-between'>
                     {busy
                         ?
-                        <p className='dark:text-white text-primary flex items-center space-x-2 mt-3'>
-                            <ImSpinner3 className="animate-spin" />
+                        <p className='text-black flex items-center space-x-2 mt-3'>
+                            <ImSpinner3 className="animate-spin" color='#000000' />
                             <span>Please wait</span>
                         </p>
                         :
                         <>
-                            <button onClick={onConfirm} type='button' className={commonClass + " bg-red-btn"} >
+                            <button onClick={onConfirm} type='button' className={commonClass + " bg-failure"} >
                                 Confirm
                             </button>
-                            <button onClick={onCancel} type='button' className={commonClass + " bg-blue-btn"}>
+                            <button onClick={onCancel} type='button' className={commonClass + " bg-success"}>
                                 Cancel
                             </button>
                         </>

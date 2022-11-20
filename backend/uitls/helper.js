@@ -41,6 +41,16 @@ exports.formatActor = actor => {
     }
 }
 
+exports.formatChef = chef => {
+    const { name, gender, about, _id } = chef
+    return {
+        id: _id,
+        name,
+        about,
+        gender
+    }
+}
+
 exports.formatMenuItem = menu => {
     const { name, description, type, price, image, _id } = menu
     return {

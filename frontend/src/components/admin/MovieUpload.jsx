@@ -4,6 +4,7 @@ import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { uploadMovie, uploadTrailer } from '../../api/movie';
 import { useNotification } from '../../hooks';
 import { commonModalTitleClasses } from '../../utils/theme';
+import ActorForm from '../form/ActorForm';
 import Modal from '../modals/Modal';
 import MovieForm from './MovieForm';
 
@@ -74,24 +75,11 @@ export default function MovieUpload({ onClose }) {
                 </div>
             </div> */}
             {
-                <Modal onClose={onClose} title='Movie Form'>
+                <Modal onClose={onClose} title='Chef Form'>
                     <div className='p-4'>
-                        <UploadProgress
-                            visible={!videoUploaded && videoSelected}
-                            message={getUploadProgressValue()}
-                            width={uploadProgress} />
-                        {
-                            !videoSelected
-                                ?
-                                <TrailerSelector
-                                    visible={!videoSelected}
-                                    onTypeError={handleTypeError}
-                                    handleChange={handleChange} />
-                                :
-                                <div className='w-full'>
-                                    <MovieForm btnTitle="Upload" busy={busy} onSubmit={!busy ? handleSubmit : null} />
-                                </div>
-                        }
+                        <div className='w-full'>
+                            <ActorForm btnTitle="Upload" busy={busy} onSubmit={!busy ? handleSubmit : null} />
+                        </div>
                     </div>
                 </Modal>
             }

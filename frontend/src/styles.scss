@@ -46,7 +46,7 @@ body {
 .product-list {
     margin-top: 20px;
     // min-height: 100vh;
-    height: 90vh;
+    height: 78vh;
     overflow: scroll;
     position: relative;
 
@@ -64,7 +64,7 @@ body {
     padding: 0;
     width: 18%;
     margin: 10px;
-    border: 1px solid rgba($color: $black, $alpha: 0.1);
+    border: 1px solid rgba($color: $black, $alpha: 0.2);
     border-radius: 4px;
 
     &__information {
@@ -365,8 +365,7 @@ $header-background-color: rgba(28, 34, 36, 0.8);
     left: 5%;
     width: 90%;
     background-color: white;
-    padding: 1rem;
-    border-radius: 2px;
+    border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     z-index: 1101;
     animation: slide-down 300ms ease-out forwards;

@@ -5,4 +5,4 @@ export const commonInputClasses = "w-full bg-transparent outline-none border-b-2
 
 export const commonModalTitleClasses = "dark:text-white text-primary text-2xl font-semibold text-center mb-5 "
 
-export const commonModalButtonClasses = "bg-secondary text-white p-1 rounded px-3 hover:bg-opacity-80 transition"
+export const commonModalButtonClasses = "bg-success text-white p-1 rounded px-3 hover:bg-opacity-80 transition"

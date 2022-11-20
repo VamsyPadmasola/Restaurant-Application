@@ -5,15 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks";
 import AppSearchForm from "../form/AppSearchForm";
 
-export default function Header({ onAddMovieClick, onAddActorClick }) {
+export default function Header({ onAddChefClick, onAddActorClick }) {
 	const [showOptions, setShowOptions] = useState(false);
 	const { toggleTheme } = useTheme();
 	const navigate = useNavigate()
 
 	const options = [
 		{ title: "Add Menu Item", onClick: onAddActorClick },
-		// { title: "Add Chef", onClick: onAddMovieClick },
-		// { title: "Add Delivery Agent", onClick: onAddActorClick },
+		{ title: "Add Chef", onClick: onAddChefClick },
+		{ title: "Add Delivery Agent", onClick: onAddActorClick },
 	];
 
 	const handleSearchSubmit = (query) => {
@@ -22,7 +22,7 @@ export default function Header({ onAddMovieClick, onAddActorClick }) {
 	}
 	return (
 		<div className="flex items-center justify-between relative p-5">
-			<AppSearchForm onSubmit={handleSearchSubmit} placeholder="Search Chefs..." />
+			{/* <AppSearchForm onSubmit={handleSearchSubmit} placeholder="Search Chefs..." /> */}
 
 			<div className="flex items-center space-x-3">
 				{/* <button
@@ -87,7 +87,7 @@ const CreateOptions = ({ options, visible, onClose }) => {
 		<div
 			id={containerID}
 			ref={container}
-			className="absolute right-0 top-12 flex flex-col space-y-3 p-5  dark:bg-secondary bg-white drop-shadow-lg rounded animate-scale z-50"
+			className="absolute left-2 top-12 flex flex-col space-y-3 p-5 bg-secondary drop-shadow-lg rounded animate-scale z-50"
 			onAnimationEnd={handleAnimationEnd}
 		>
 			{options.map(({ title, onClick }) => {

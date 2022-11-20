@@ -1,5 +1,5 @@
 const express = require('express');
-const { createMenuItem, getMenu } = require('../controllers/menu');
+const { createMenuItem, getMenu, searchMenu, removeMenuItem, updateMenuItem } = require('../controllers/menu');
 const { isAdmin, isAuth } = require('../middlewares/auth');
 const { uploadImage } = require('../middlewares/multer');
 const { menuInfoValidator, validate } = require('../middlewares/validator');
@@ -15,18 +15,18 @@ router.post(
     createMenuItem
 );
 
-// router.post(
-//     "/update/:actorId",
-//     isAuth,
-//     isAdmin,
-//     uploadImage.single("avatar"),
-//     actorInfoValidator,
-//     validate,
-//     updateActor
-// );
+router.post(
+    "/update/:itemId",
+    isAuth,
+    isAdmin,
+    uploadImage.single("image"),
+    menuInfoValidator,
+    validate,
+    updateMenuItem
+);
 
-// router.delete('/:actorId', isAuth, isAdmin, removeActor)
-// router.get('/search', isAuth, isAdmin, searchActor)
+router.delete('/:menuId', isAuth, isAdmin, removeMenuItem)
+router.get('/search', isAuth, isAdmin, searchMenu)
 // router.get('/latest-uploads', isAuth, isAdmin, getLatestActors)
 router.get('/items', getMenu)
 // router.get('/single/:id', getSingleActor)

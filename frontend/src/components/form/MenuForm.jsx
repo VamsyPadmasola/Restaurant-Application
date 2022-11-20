@@ -26,7 +26,7 @@ const validateMenu = (menu) => {
     if (!name.trim()) return { error: 'Item name is missing!' }
     if (!description.trim()) return { error: 'Item description is missing!' }
     if (!type.trim()) return { error: 'Item type is missing!' }
-    if (!price.trim()) return { error: 'Item price is missing!' }
+    if (!price) return { error: 'Item price is missing!' }
 
     if (image && !image.type?.startsWith('image'))
         return { error: 'Invalid image file!' }
@@ -123,7 +123,6 @@ export default function MenuForm({ title, btnTitle, busy, onSubmit, initialState
             </div> */}
             <div className='mt-5 flex justify-end items-end'>
                 <button type='submit' className={commonModalButtonClasses + ' w-36 h-8 flex items-center justify-center '}>
-
                     {busy ? <ImSpinner3 size={20} className="animate-spin" /> : btnTitle}
                 </button>
             </div>

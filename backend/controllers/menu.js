@@ -18,6 +18,17 @@ exports.createMenuItem = async (req, res) => {
     res.status(201).json({ menu: formatMenuItem(newMenuItem) })
 }
 
+exports.searchMenu = async (req, res) => {
+    const { name } = req.query
+
+    if (!name.trim()) return sendError(res, 'Invalid Request')
+
+    const result = await Menu.find({ name: { $regex: name, $options: 'i' } })
+
+    const menuitems = result.map(item => formatMenuItem(item))
+    res.json({ results: menuitems })
+}
+
 // exports.updateActor = async (req, res) => {
 //     const { name, about, gender } = req.body;
 //     const { file } = req
@@ -48,52 +59,24 @@ exports.createMenuItem = async (req, res) => {
 //     res.status(201).json({ actor: formatActor(actor) })
 // }
 
-// exports.removeActor = async (req, res) => {
-//     const { actorId } = req.params
-//     if (!isValidObjectId(actorId))
-//         return sendError(res, 'Invalid request!')
-//     const actor = await Actor.findById(actorId)
-//     if (!actor)
-//         return sendError(res, 'Invalid request, record not found!')
+exports.removeMenuItem = async (req, res) => {
+    const { menuId } = req.params
+    if (!isValidObjectId(menuId))
+        return sendError(res, 'Invalid request!')
+    const item = await Menu.findById(menuId)
+    if (!item)
+        return sendError(res, 'Invalid request, record not found!')
 
-//     const public_id = actor.avatar?.public_id
-//     if (public_id) {
-//         const { result } = await cloudinary.uploader.destroy(public_id)
-//         if (result !== 'ok')
-//             return sendError(res, 'Could not remove image from the cloud.')
-//     }
+    const public_id = item.image?.public_id
+    if (public_id) {
+        const { result } = await cloudinary.uploader.destroy(public_id)
+        if (result !== 'ok')
+            return sendError(res, 'Could not remove image from the cloud.')
+    }
 
-//     await Actor.findByIdAndDelete(actorId)
-//     res.json({ message: "Record removed Successfully!" })
-// }
-
-// exports.searchActor = async (req, res) => {
-//     const { name } = req.query
-
-//     if (!name.trim()) return sendError(res, 'Invalid Request')
-//     // const result = await Actor.find({ $text: { $search: `"${query.name}"` } })
-//     const result = await Actor.find({ name: { $regex: name, $options: 'i' } })
-
-//     const actors = result.map(actor => formatActor(actor))
-//     res.json({ results: actors })
-// }
-
-// exports.getLatestActors = async (req, res) => {
-//     const result = await Actor.find().sort({ createdAt: '-1' }).limit(12)
-//     const actors = result.map(actor => formatActor(actor))
-//     res.json(actors)
-// }
-
-// exports.getSingleActor = async (req, res) => {
-//     const { id } = req.params
-//     if (!isValidObjectId(id))
-//         return sendError(res, 'Invalid request!')
-//     const actor = await Actor.findById(id)
-//     if (!actor)
-//         return sendError(res, 'Invalid request, record not found!', 404)
-//     res.json({ actor: formatActor(actor) })
-// }
-
+    await Menu.findByIdAndDelete(item)
+    res.json({ message: "Item removed Successfully!" })
+}
 exports.getMenu = async (req, res) => {
     const { pageNo = 0, limit = 10 } = req.query;
 
@@ -108,34 +91,36 @@ exports.getMenu = async (req, res) => {
     })
 }
 
-// exports.updateActor = async (req, res) => {
-//     const { name, about, gender } = req.body;
-//     const { file } = req
-//     const { actorId } = req.params
+exports.updateMenuItem = async (req, res) => {
+    const { name, description, type, price } = req.body;
+    const { file } = req
+    const { itemId } = req.params
 
-//     if (!isValidObjectId(actorId))
-//         return sendError(res, 'Invalid request!')
-//     const actor = await Actor.findById(actorId)
-//     if (!actor)
-//         return sendError(res, 'Invalid request, record not found!')
+    if (!isValidObjectId(itemId))
+        return sendError(res, 'Invalid request!')
+    const item = await Menu.findById(itemId)
+    if (!item)
+        return sendError(res, 'Invalid request, record not found!')
 
-//     const public_id = actor.avatar?.public_id
+    const public_id = item.image?.public_id
 
-//     if (public_id) {
-//         const { result } = await cloudinary.uploader.destroy(public_id)
-//         if (result !== 'ok')
-//             return sendError(res, 'Could not remove image from the cloud.')
-//     }
+    // if (public_id) {
+    //     const { result } = await cloudinary.uploader.destroy(public_id)
+    //     if (result !== 'ok')
+    //         return sendError(res, 'Could not remove image from the cloud.')
+    // }
 
-//     if (file) {
-//         const { url: url, public_id } = await uploadImageToCloud(file.path)
-//         actor.avatar = { url: url, public_id: public_id }
-//     }
+    if (file) {
+        const { url: url, public_id } = await uploadImageToCloud(file.path)
+        item.image = { url: url, public_id: public_id }
+    }
 
-//     actor.name = name,
-//         actor.email = about,
-//         actor.gender = gender
+    item.name = name
+    item.description = description
+    item.type = type
+    item.price = price
 
-//     await actor.save()
-//     res.status(201).json({ actor: formatActor(actor) })
-// }
+
+    await item.save()
+    res.status(201).json({ item: formatMenuItem(item) })
+}
