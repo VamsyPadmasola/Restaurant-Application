@@ -1,0 +1,253 @@
+@import "./loader.scss";
+// @import "./cart.scss";
+
+@font-face {
+	font-family: 'myRoboto';
+	src: url('../src/assets/fonts/Hind/Hind-Regular.ttf') format('truetype');
+
+}
+
+.spin-button-none::-webkit-outer-spin-button,
+.spin-button-none::-webkit-inner-spin-button {
+	appearance: none;
+}
+
+body {
+	overscroll-behavior: none;
+}
+
+.bounce-custom {
+	animation: bounce-custom 0.5s;
+}
+
+@keyframes bounce-custom {
+
+	from,
+	to {
+		transform: scale(1, 1);
+	}
+
+	25% {
+		transform: scale(0.9, 1.1);
+	}
+
+	50% {
+		transform: scale(1.1, 0.9);
+	}
+
+	75% {
+		transform: scale(0.95, 1.05);
+	}
+}
+
+.second-modal {
+	position: fixed;
+	top: 30vh;
+	left: 30%;
+	background-color: white;
+	padding: 15px;
+	border-radius: 2px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+	animation: slide-down 300ms ease-out forwards;
+	z-index: 1200;
+}
+
+
+.modal-overlay {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 1100;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.second-modal-overlay {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 1101;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.custom-scroll-bar::-webkit-scrollbar {
+	width: 3px;
+	height: 3px;
+}
+
+/* Track */
+.custom-scroll-bar::-webkit-scrollbar-track {
+	background: #222222;
+}
+
+/* Handle */
+.custom-scroll-bar::-webkit-scrollbar-thumb {
+	background: #909090;
+}
+
+/* Handle on hover */
+.custom-scroll-bar::-webkit-scrollbar-thumb:hover {
+	background: #b81d24;
+}
+
+.modal {
+	position: fixed;
+	top: 10vh;
+	left: 5%;
+	width: 100%;
+	background-color: white;
+	border-radius: 2px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+	z-index: 1101;
+	animation: slide-down 300ms ease-out forwards;
+}
+
+.modal-content {
+	min-height: 20rem;
+	max-height: 40rem;
+	overflow: auto;
+}
+
+.img-wrap {
+	flex-basis: 20%;
+	max-width: 20%;
+}
+
+.img-flmi {
+	height: 80px;
+}
+
+.information {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.information h4 {
+	margin-top: 0px;
+	margin-bottom: 4px;
+	color: black;
+	font-weight: 500;
+	letter-spacing: 0.02px;
+}
+
+.animate-scale {
+	transform-origin: 0% 0%;
+	animation: scale 0.2s;
+}
+
+.animate-scale-reverse {
+	transform-origin: 0% 0%;
+	animation: scale 0.2s reverse forwards;
+}
+
+.shadow-custom {
+	box-shadow:
+		0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+		0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+		0 12.5px 10px rgba(0, 0, 0, 0.06),
+		0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+		0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+		0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.custom-dark {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
+}
+
+@keyframes scale {
+	0% {
+		transform: scaleY(0);
+	}
+
+	100% {
+		transform: scaleY(1);
+	}
+}
+
+@media (min-width: 768px) {
+	.modal {
+		width: 40rem;
+		left: calc(50% - 20rem);
+	}
+}
+
+@keyframes slide-down {
+	from {
+		opacity: 0;
+		transform: translateY(-2rem);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.slide-in-from-right {
+	animation: slideInFromRight 0.5s ease-in;
+}
+
+.slide-out-to-left {
+	animation: slideOutToLeft 0.5s ease-in;
+}
+
+.slide-in-from-left {
+	animation: slideInFromLeft 0.5s ease-in;
+}
+
+.slide-out-to-right {
+	animation: slideOutToRight 0.5s ease-in;
+}
+
+@keyframes slideInFromRight {
+	from {
+		transform: translateX(100%);
+	}
+
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes slideOutToLeft {
+	from {
+		transform: translateX(0%);
+	}
+
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes slideInFromLeft {
+	from {
+		transform: translateX(-100%);
+	}
+
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes slideOutToRight {
+	from {
+		transform: translateX(0%);
+	}
+
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		font-family: myRoboto;
+	}
+}
