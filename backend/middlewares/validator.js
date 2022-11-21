@@ -30,6 +30,12 @@ exports.chefInfoValidator = [
     check('gender').trim().not().isEmpty().withMessage('Gender is a required field!'),
 ];
 
+exports.deliveryInfoValidator = [
+    check('name').trim().not().isEmpty().withMessage('Name is missing!'),
+    check('contact').not().isEmpty().withMessage('Contact is a required field!'),
+    check('gender').trim().not().isEmpty().withMessage('Gender is a required field!'),
+];
+
 exports.menuInfoValidator = [
     check('name').trim().not().isEmpty().withMessage('Item name is missing!'),
     check('description').trim().not().isEmpty().withMessage('Description is a required field!'),

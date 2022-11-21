@@ -17,16 +17,25 @@ export default function Navbar() {
 		navigate("/movie/search?title=" + query)
 	}
 
+	const handleBook = () => {
+		navigate("/table")
+	}
+
 	return (
 		<div className="bg-secondary shadow-sm shadow-gray-500">
 			<Container className="p-2">
 				<div className="flex justify-between items-center">
 					<Link to="/" className="flex items-center space-x-2">
 						<img src="logo_white.png" alt="" className="sm:h-8 h-6" />
-						<span className="text-white sm:text-lg text-sm">Restaurant Name</span>
+						<span className="text-white sm:text-lg text-sm">The Eatery</span>
 					</Link>
 
 					<ul className="flex items-center sm:space-x-4 space-x-2">
+						<li>
+							<button onClick={handleBook} className="text-white font-semibold  sm:text-lg text-sm mr-10">
+								Reserve Table
+							</button>
+						</li>
 						{/* <li>
 							<AppSearchForm
 								placeholder="Search..."

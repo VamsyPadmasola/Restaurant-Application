@@ -22,6 +22,7 @@ export default function ActorUpload({ onClose }) {
 
         updateNotification('success', 'Menu Item added successfully!')
         onClose()
+        window.location.reload(false)
     }
     return (
         <Modal onClose={onClose} style=" top-[25vh]" title='Menu Form'>

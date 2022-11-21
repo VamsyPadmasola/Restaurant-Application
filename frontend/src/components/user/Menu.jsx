@@ -123,8 +123,8 @@ export default function Menu() {
                 </div> */}
                 <NotFound text='Record not found' visible={resultNotFound} />
 
-                <div className={"product-list"}>
-                    <div className={"product-list--wrapper"}>
+                <div className={"product-list h-[85vh]"}>
+                    <div className={"product-list--wrapper w-full"}>
                         {
                             results.length || resultNotFound
                                 ?
@@ -231,18 +231,18 @@ const MenuItem = ({ data, onEditClick, onDeleteClick }) => {
                         </button>
                         :
                         <div className="cart-addon">
-                            <button onClick={decreaseCounter}><span>-</span></button>
+                            <button className="bg-secondary tex-xl p-2 text-white w-10 h-10" onClick={decreaseCounter}><span>-</span></button>
                             <span>{item.quantity}</span>
-                            <button onClick={increaseCounter}><span>+</span></button>
+                            <button className="bg-secondary text-xl p-2 text-white w-10 h-10" onClick={increaseCounter}><span>+</span></button>
                         </div>
 
                 }
-            </div>
+            </div >
             {
                 showModal
                 &&
                 <Modal onClose={handleModal}>
-                    <div className="item-card__modal">
+                    <div className="item-card__modal p-4">
                         <div className="img-wrap">
                             <img className="w-52" src={data.image} />
                         </div>
@@ -265,9 +265,9 @@ const MenuItem = ({ data, onEditClick, onDeleteClick }) => {
                                     </button>
                                     :
                                     <div className="cart-addon">
-                                        <button onClick={decreaseCounter}><span>-</span></button>
+                                        <button className="bg-secondary text-xl p-2 text-white w-10 h-10" onClick={decreaseCounter}><span>-</span></button>
                                         <span>{item.quantity}</span>
-                                        <button onClick={increaseCounter}><span>+</span></button>
+                                        <button className="bg-secondary text-xl p-2 text-white w-10 h-10" onClick={increaseCounter}><span>+</span></button>
                                     </div>
                             }
                         </div>

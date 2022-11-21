@@ -51,6 +51,16 @@ exports.formatChef = chef => {
     }
 }
 
+exports.formatDelivery = agent => {
+    const { name, gender, contact, _id } = agent
+    return {
+        id: _id,
+        name,
+        contact,
+        gender
+    }
+}
+
 exports.formatMenuItem = menu => {
     const { name, description, type, price, image, _id } = menu
     return {

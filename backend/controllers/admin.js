@@ -1,14 +1,20 @@
+const Order = require("../models/order")
 const Movie = require("../models/movie")
-const Review = require("../models/review")
+const Chef = require("../models/chef")
 const User = require("../models/user")
+const Delivery = require("../models/delivery")
+
 const { topRatedMoviesPipeline, getAverageRatings } = require("../uitls/helper")
 
 exports.getAppInfo = async (req, res) => {
-    const movieCount = await Movie.countDocuments()
-    const reviewCount = await Review.countDocuments()
+    const orderCount = await Order.countDocuments()
     const userCount = await User.countDocuments()
+    const chefCount = await Chef.countDocuments()
+    const deliveryCount = await Delivery.countDocuments()
 
-    res.json({ appInfo: { movieCount, reviewCount, userCount } })
+    const staffCount = deliveryCount + chefCount
+
+    res.json({ appInfo: { orderCount, userCount, staffCount } })
 }
 
 exports.getMostRated = async (req, res) => {

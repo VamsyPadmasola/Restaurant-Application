@@ -104,11 +104,12 @@ exports.updateMenuItem = async (req, res) => {
 
     const public_id = item.image?.public_id
 
-    // if (public_id) {
-    //     const { result } = await cloudinary.uploader.destroy(public_id)
-    //     if (result !== 'ok')
-    //         return sendError(res, 'Could not remove image from the cloud.')
-    // }
+
+    if (public_id) {
+        const { result } = await cloudinary.uploader.destroy(public_id)
+        if (result !== 'ok')
+            return sendError(res, 'Could not remove image from the cloud.')
+    }
 
     if (file) {
         const { url: url, public_id } = await uploadImageToCloud(file.path)

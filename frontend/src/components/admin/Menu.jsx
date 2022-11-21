@@ -123,7 +123,7 @@ export default function Menu() {
                 </div>
                 <NotFound text='No item found' visible={resultNotFound} />
 
-                <div className={"product-list ml-3"}>
+                <div className={"product-list h-[78vh] ml-3"}>
                     <div className={"product-list--wrapper"}>
                         {results.length || resultNotFound
                             ?

@@ -5,6 +5,7 @@ import EmailVerification from "./components/auth/EmailVerification";
 import ForgetPassword from "./components/auth/ForgetPassword";
 import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
+import { Form } from "./components/BookTable/Form";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import Header from "./components/user/Header";
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/movie/reviews/:movieId" element={<MovieReviews />} />
         <Route path="/movie/search" element={<SearchMovies />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/table" element={<Form />} />
       </Routes>
     </>
   );

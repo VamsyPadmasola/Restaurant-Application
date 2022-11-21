@@ -8,10 +8,15 @@ export default function Header() {
         <header className="header-main">
             <div className='nav-brand'>
                 {/* <img className='logo-img' src={ } /> */}
-                <span className='spn-logo'>Restaurant Name</span>
+                <span className='spn-logo'>The Eatery</span>
             </div>
             <div className="searchBox-container">
                 {/* <SearchBox /> */}
+            </div>
+            <div>
+                <button>
+                    Reserve Table
+                </button>
             </div>
             <div className="cart-container">
                 <Cart />

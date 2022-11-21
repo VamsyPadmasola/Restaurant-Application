@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks";
 import AppSearchForm from "../form/AppSearchForm";
 
-export default function Header({ onAddChefClick, onAddActorClick }) {
+export default function Header({ onAddChefClick, onAddActorClick, onAddAgentClick }) {
 	const [showOptions, setShowOptions] = useState(false);
 	const { toggleTheme } = useTheme();
 	const navigate = useNavigate()
@@ -13,7 +13,7 @@ export default function Header({ onAddChefClick, onAddActorClick }) {
 	const options = [
 		{ title: "Add Menu Item", onClick: onAddActorClick },
 		{ title: "Add Chef", onClick: onAddChefClick },
-		{ title: "Add Delivery Agent", onClick: onAddActorClick },
+		{ title: "Add Delivery Agent", onClick: onAddAgentClick },
 	];
 
 	const handleSearchSubmit = (query) => {

@@ -18,7 +18,7 @@ export default function Navbar() {
           <li className="mb-8">
             <Link to="/" className="flex items-center space-x-3 mt-5">
               <img className="h-12" src="logo_white.png" />
-              <span className="text-2xl text-white ">Restaurant Name</span>
+              <span className="text-2xl text-white ">The Eatery</span>
             </Link>
           </li>
           <li>

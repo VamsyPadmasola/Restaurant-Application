@@ -12,14 +12,21 @@ import SearchMovie from "../components/admin/SearchMovie";
 import Menu from "../components/admin/Menu";
 import Chef from "../components/admin/Chef";
 import ChefUpload from "../components/modals/ChefUpload";
+import DeliveryAgents from "../components/admin/DeliveryAgents";
+import AgentUpload from "../components/modals/AgentUpload";
 
 export default function AdminNavigator() {
 
 	const [showChefUploadModal, setShowChefUploadModal] = useState(false)
+	const [showAgentUploadModal, setShowAgentUploadModal] = useState(false)
 	const [showActorUploadModal, setShowActorUploadModal] = useState(false)
 
 	const handleChefUploadModal = () => {
 		setShowChefUploadModal(previousState => !previousState)
+	}
+
+	const handleAgentUploadModal = () => {
+		setShowAgentUploadModal(previousState => !previousState)
 	}
 
 	const handleActorUploadModal = () => {
@@ -32,12 +39,14 @@ export default function AdminNavigator() {
 				<Navbar />
 				<div className="flex-1 max-w-screen-xl overflow-hidden">
 					<Header onAddChefClick={() => setShowChefUploadModal(!showChefUploadModal)}
-						onAddActorClick={() => setShowActorUploadModal(!showActorUploadModal)} />
+						onAddActorClick={() => setShowActorUploadModal(!showActorUploadModal)}
+						onAddAgentClick={() => setShowAgentUploadModal(!showAgentUploadModal)} />
 					<Routes>
 						<Route path="/" element={<Dashboard />} />
 						<Route path="/movies" element={<Movies />} />
 						<Route path="/menu" element={<Menu />} />
 						<Route path="/actors" element={<Actors />} />
+						<Route path="/delivery" element={<DeliveryAgents />} />
 						<Route path="/chef" element={<Chef />} />
 						<Route path="/search" element={<SearchMovie />} />
 						<Route path="*" element={<NotFound />} />
@@ -51,6 +60,10 @@ export default function AdminNavigator() {
 			{
 				showActorUploadModal &&
 				<ActorUpload onClose={handleActorUploadModal} />
+			}
+			{
+				showAgentUploadModal &&
+				<AgentUpload onClose={handleAgentUploadModal} />
 			}
 		</>
 	);

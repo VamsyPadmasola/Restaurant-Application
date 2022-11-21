@@ -11,8 +11,8 @@ exports.generateMailTransporter = () =>
     nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'cinemaaareview1@gmail.com',
-            pass: 'mqafbkqlwdcyjzyc'
+            user: 'theeatery81@gmail.com',
+            pass: 'hrihlyhlsaitbbch'
         },
         port: 465,
         host: 'smtp.gmail.com'
